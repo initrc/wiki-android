@@ -5,13 +5,15 @@ status: active
 last_updated: 2026-05-04
 sources:
   - chatgpt-jetpack-compose-notes
+  - android-docs-compose-documentation
+  - android-docs-compose-mental-model
 tags:
   - android
 ---
 
 # Android Development Wiki Overview
 
-This wiki is a maintained knowledge base for Android development. Its first ingested source is a ChatGPT-generated Jetpack Compose note, so current Compose claims should be treated as useful working notes rather than primary-source facts until official Android documentation is ingested.
+This wiki is a maintained knowledge base for Android development. Its first ingested source was a ChatGPT 5.5-generated Jetpack Compose note, and the Compose pages have now been reviewed against the official Android Jetpack Compose documentation captured on 2026-05-04.
 
 ## Current Coverage
 
@@ -29,6 +31,10 @@ The wiki currently covers Jetpack Compose fundamentals:
 
 ## Reliability Notes
 
-- The current Compose synthesis is based on [[chatgpt-jetpack-compose-notes]], a local ChatGPT-generated Markdown note.
-- Treat these pages as `needs-review` where they describe API behavior or recommendations that should be validated against official docs.
-- Official Android documentation should be ingested next for Compose state, modifiers, lists, effects, and text input.
+- Official Android documentation is now the primary source for the Compose mental model, layout, modifiers, state, lists, effects, input, graphics, animation, and text field guidance.
+- [[chatgpt-jetpack-compose-notes]] remains useful as local study context, but it is not authoritative.
+- One raw-note issue was found during review and corrected in the raw note: the original note reversed the click target behavior for `clickable().padding()` versus `padding().clickable()`.
+
+## Gaps
+
+The wiki still does not cover Compose architecture, navigation, accessibility semantics, performance stability, testing, Material components, theming, migration from Views, or adaptive layouts as dedicated pages.

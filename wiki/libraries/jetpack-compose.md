@@ -1,10 +1,14 @@
 ---
 title: "Jetpack Compose"
 kind: library
-status: needs-review
+status: active
 last_updated: 2026-05-04
 sources:
   - chatgpt-jetpack-compose-notes
+  - android-docs-compose-documentation
+  - android-docs-compose-mental-model
+  - android-docs-compose-state
+  - android-docs-compose-side-effects
 tags:
   - android
   - jetpack
@@ -13,15 +17,19 @@ tags:
 
 # Jetpack Compose
 
-Jetpack Compose is the current wiki's first major Android UI topic. The local source presents Compose as declarative UI where the screen is described as a function of state: when state changes, composables that read that state can be recomposed.
+Jetpack Compose is Android's modern declarative UI toolkit. The official docs describe Compose as an API for rendering UI without imperatively mutating view objects: app logic provides state, composables transform that state into UI, and UI events request state changes.
 
 ## Working Mental Model
 
-- Model the screen state first.
-- Build composables around that state.
-- Keep UI as a function of state.
-- Hoist state when multiple composables need it.
-- Keep side effects out of the rendering path.
+- Model screen state first, then pass it into composables.
+- Treat composables that emit UI as fast, idempotent, and side-effect free.
+- Let events flow up to app logic, and let state flow back down.
+- Hoist state when callers, siblings, UI logic, or business logic need to control it.
+- Use Compose effect APIs for UI-related side effects that must be tied to composition.
+
+## Recomposition Notes
+
+Recomposition is not a reliable place for side effects. Compose can skip recomposition for unchanged inputs, restart or cancel optimistic recomposition, and run composables often during animations. The durable rule is to make rendering code a pure description of the current UI and move expensive or state-changing work outside composition or into the appropriate effect or state holder.
 
 ## Topic Map
 
@@ -34,6 +42,6 @@ Jetpack Compose is the current wiki's first major Android UI topic. The local so
 - [[compose-drawing-and-animation]] covers custom drawing and animation APIs.
 - [[compose-practice-problems]] captures exercises for reinforcing these concepts.
 
-## Reliability
+## Official Review
 
-This page is based on [[chatgpt-jetpack-compose-notes]], a ChatGPT-generated local note. It should be verified with official Android documentation before being used as a primary reference.
+The local note's high-level mental model aligns with the official Compose documentation. The official docs add stronger constraints: composables should be side-effect free, state changes should drive recomposition through observable state, and effect APIs should be used for predictable side effects.

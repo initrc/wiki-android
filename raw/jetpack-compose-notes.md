@@ -140,7 +140,7 @@ Modifier
     .padding(16.dp)
 ```
 
-The click target is based on the area before padding.
+The padding is part of the click target, because `padding` is applied after `clickable`.
 
 ```kotlin
 Modifier
@@ -148,7 +148,7 @@ Modifier
     .clickable { }
 ```
 
-The click target includes the padded area.
+The outer padding is not part of the click target, because `padding` is applied before `clickable`.
 
 Important nuance for full-width rows:
 
